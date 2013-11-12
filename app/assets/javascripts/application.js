@@ -13,3 +13,22 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require_self
+$(document).on('change', '.permissions-checkbox', function(){
+
+	var data = {permission_id: $(this).data('permission'), change: $(this).is(':checked')}
+	
+	var url = "/roles/"+ $(this).data('role');
+
+	$.ajax(
+	{
+		url: url,
+		data: data,
+		method: 'put',
+		success: function(res){
+			console.log(res);
+		}
+	}
+	);
+
+});

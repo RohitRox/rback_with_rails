@@ -1,6 +1,6 @@
 RbackWithRails::Application.routes.draw do
   resources :projects
-
+  resources :roles
 
   devise_for :users
 

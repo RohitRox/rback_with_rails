@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = current_user.get_projects(params)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -35,6 +35,13 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
     @project = Project.find(params[:id])
+    respond_to do |format|
+      if current_user.can_update_project?(@project)
+        format.html
+      else
+        format.html { redirect_to projects_path, notice: 'You dont have permisison to edit this project.' }
+      end
+    end
   end
 
   # POST /projects

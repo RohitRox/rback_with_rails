@@ -1,0 +1,15 @@
+%h1 Roles
+
+%table.table
+	%thead
+		%tr
+			%th
+			- @roles.each do |role|
+				%th=role.name
+	%tbody
+		- @permisisons.each do |perm|
+			%tr
+				%th=perm.description
+				- @roles.each do |role|
+					%th
+						= check_box_tag "", "2", role.permissions.include?(perm), class: "permissions-checkbox", "data-role"=> role.id, "data-permission"=> perm.id
